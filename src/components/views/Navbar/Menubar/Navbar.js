@@ -4,23 +4,21 @@ import {
     NavLink,
     Bars,
     NavMenu,
-    NavBtn,
-    NavBtnLink
 } from './NavbarStyle';
 
 const Navbar = ({ toggle }) => {
     return (
         <>
             <Nav>
-                <NavLink to='/LandingPage'>
+                <NavLink to='/products'>
                     Class101
                  </NavLink>
                 <Bars onClick={toggle} />
                 <NavMenu>
-                    <NavLink to='/LandingPage'>
+                    <NavLink to='/products'>
                         Products
                       </NavLink>
-                    <NavLink to='/Cart'>
+                    <NavLink to='/cart'>
                         Cart
                       </NavLink>
                 </NavMenu>

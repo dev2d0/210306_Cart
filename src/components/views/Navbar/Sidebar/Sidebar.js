@@ -17,8 +17,8 @@ function Sidebar({ isOpen, toggle }) {
             </Icon>
             <SidebarWrapper>
                 <SidebarMenu>
-                    <SidebarLink to='/LandingPage' onClick={toggle}>Products</SidebarLink>
-                    <SidebarLink to='/Cart' onClick={toggle}>Cart</SidebarLink>
+                    <SidebarLink to='/products' onClick={toggle}>Products</SidebarLink>
+                    <SidebarLink to='/cart' onClick={toggle}>Cart</SidebarLink>
                 </SidebarMenu>
             </SidebarWrapper>
         </SidebarContainer>
