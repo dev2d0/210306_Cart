@@ -1,33 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
+import "./CartBlock.css"
 
 function CartBlock(props) {
-   
-    const renderCartImage = (images) => {
-        if (images.length > 0) {
-            let image = images[0]
-            return `https://dev2d0travelexpenses.s3.ap-northeast-2.amazonaws.com/${image}`
-        }
-    }
-
+    console.log(props.cart)
     const renderItems = () => (
-        props.travels && props.travels.map((travel, index) => (
+        props.cart && props.cart.map((cart, index) => (
             <tr key={index}>
                 <td>
-                    <a href={`/travel/${travel._id}`}>
-                        <img
-                            height='60px'
-                            style={{ width: '70px' }} alt="travel"
-                            src={renderCartImage(travel.images)} />
-                    </a>
+                    <img
+                        height='60px'
+                        style={{ width: '70px' }} alt="travel"
+                        src={cart.coverImage} />
+
                 </td>
                 <td>
-                    {travel.title}
+                    {cart.title}
                 </td>
                 <td>
-                    ₩{travel.price.toLocaleString()}원
+                    ₩{cart.price.toLocaleString()}원
                 </td>
                 <td>
-                    <button onClick={() => props.deleteScrap(travel._id)}>
+                    <button onClick={() => props.deleteScrap(cart.id)}>
                         Remove
                     </button>
                 </td>

@@ -17,3 +17,15 @@ export const List = styled.div`
           grid-template-columns: repeat(1, 80vw);
     }
 `;
+
+export const Coupon = styled.div`
+    position: absolute;
+    font-size: 0.6rem;
+    font-weight: bolder;
+    top: 8px;
+    left: 8px;
+    color: #ffffff;
+    background-color: #ff0000;
+    padding: 0.5rem 0.5rem;
+    border-radius: 2px;
+`;

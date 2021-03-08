@@ -1,10 +1,14 @@
-import React, {useState}  from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from 'antd';
+import { useDispatch } from "react-redux";
+import { addCart } from "../../../../Store/actions";
 import {
-    List
+    List,
+    Coupon
 } from './ProductStyle';
 
 const ProductItem = ({ props, posts, clickHandler }) => {
+    const dispatch = useDispatch();
     const [Id, setId] = useState([])
 
     const handleClick = (id) => {
@@ -25,7 +29,7 @@ const ProductItem = ({ props, posts, clickHandler }) => {
     const sortPosts = sortData(posts, 'score')
 
     const renderCards = sortPosts.map((item, index) => {
-        //console.log(item.id)
+        console.log(item)
         return (
             <Card
                 key={index}
@@ -36,14 +40,17 @@ const ProductItem = ({ props, posts, clickHandler }) => {
                         src={item.coverImage}
                     />
                 }>
-                <Button onClick={() => handleClick(item.id)} id={Id} style={{ width: '100%' }} size="small" shape="round" type="danger">
+                 {item.availableCoupon !== false && <Coupon>할인 쿠폰</Coupon>}
+
+                <Button onClick={() => dispatch(addCart(item))} style={{ width: '100%' }} size="small" shape="round" type="danger">
                     장바구니
                 </Button><br />
                 <br />
                 <span>제목 :  {item.title} </span><br />
+                <span>♥ {item.score} </span><br />
                 <br />
-                <span>가격 :  {`${item.price.toLocaleString()}원`} </span><br />
-                <span>점수 :  {`${item.score.toLocaleString()}점`} </span><br />
+                <hr />
+                <span>{`${item.price.toLocaleString()}원`} </span><br />
             </Card>
         )
     })

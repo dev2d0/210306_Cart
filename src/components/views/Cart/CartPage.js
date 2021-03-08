@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import CartBlock from './Sections/CartBlock.js';
+import { useSelector } from "react-redux";
 import { Empty } from 'antd';
 
 function CartPage() {
+    const cart = useSelector(store => store.cartReducer);
+    console.log(cart)
     const [Total, setTotal] = useState(0)
     const [ShowTotal, setShowTotal] = useState(false)
    
@@ -27,8 +30,9 @@ function CartPage() {
         <div style={{ width: '85%', margin: '3rem auto', minHeight: '750px' }}>
             <h1>My Cart</h1>
             <div>
-                <CartBlock deleteScrap={deleteHandler}/>
+                <CartBlock cart={cart} deleteScrap={deleteHandler}/>
             </div>
+          
             {ShowTotal ?
                 <div style={{ marginTop: '3rem' }}>
                     <h2>장바구니 상품의 총액: ${prices}</h2>
