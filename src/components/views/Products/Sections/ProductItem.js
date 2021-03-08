@@ -1,24 +1,31 @@
-import React from "react";
-import { productItems } from "../../data/productItems.js";
+import React, {useState}  from 'react';
 import { Card, Button } from 'antd';
 import {
     List
 } from './ProductStyle';
 
-const productItem = ({ posts, clickHandler }) => {
-    console.log(posts)
+const ProductItem = ({ props, posts, clickHandler }) => {
+    const [Id, setId] = useState([])
+
+    const handleClick = (id) => {
+        console.log(id)
+        console.log(Id)
+        const newCarts = [...Id, id]
+        setId(newCarts)
+        clickHandler(newCarts)//부모 컴포넌트로 보내줌.
+    }
 
     var sortData = function (data, key) {
         return data.sort(function (a, b) {
             var x = a[key];
             var y = b[key];
-            return x < y ? -1 : x > y ? 1 : 0;
-
+            return x > y ? -1 : x > y ? 1 : 0;
         });
-    };
-    const sortPosts=sortData(posts, 'score')
+    };//내름차순 정렬
+    const sortPosts = sortData(posts, 'score')
 
     const renderCards = sortPosts.map((item, index) => {
+        //console.log(item.id)
         return (
             <Card
                 key={index}
@@ -29,8 +36,8 @@ const productItem = ({ posts, clickHandler }) => {
                         src={item.coverImage}
                     />
                 }>
-                <Button style={{ width: '100%' }} size="small" shape="round" type="danger" onClick={clickHandler}>
-                    스크랩
+                <Button onClick={() => handleClick(item.id)} id={Id} style={{ width: '100%' }} size="small" shape="round" type="danger">
+                    장바구니
                 </Button><br />
                 <br />
                 <span>제목 :  {item.title} </span><br />
@@ -50,4 +57,4 @@ const productItem = ({ posts, clickHandler }) => {
     );
 };
 
-export default productItem;
+export default ProductItem;

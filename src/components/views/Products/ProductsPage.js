@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Button } from 'antd';
-import { productItems } from "../../data/productItems.js";
-import ProductItem from './ProductItem'
-import Paging from './Paging'
+import { productItems } from "../../data/productItems.js.js";
+import ProductItem from './Sections/ProductItem'
+import Paging from './Sections/Paging'
 import 'antd/dist/antd.css';
 import {
     List
-} from './ProductStyle';
+} from './Sections/ProductStyle';
 
 const { Meta } = Card;
 
@@ -14,14 +14,21 @@ function Products() {
     const [posts, setPosts] = useState(productItems);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(5);
-    console.log(posts)
+    const [quantity, setQuantity] = useState(0);
+    const [carts, setCarts] = useState([])
+
+   // console.log(productItems)
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    const clickHandler = () => {
+    const clickHandler = (id) => {
+        console.log(carts)
+        console.log(id)
+        const newCarts = { ...carts, id }//Cart id State의 정보를 담는다.
+        console.log(newCarts)
     }
 
     const renderCards = productItems.map((item, index) => {
@@ -35,9 +42,6 @@ function Products() {
                         src={item.coverImage}
                     />
                 }>
-                <Button style={{ width: '100%' }} size="small" shape="round" type="danger" onClick={clickHandler}>
-                    스크랩
-                </Button><br />
                 <br />
                 <span>제목 :  {item.title} </span><br />
                 <br />
@@ -50,7 +54,7 @@ function Products() {
     return (
         <div style={{ width: '85%', margin: '3rem auto', minHeight: '770px' }}>
             <div style={{ textAlign: 'center' }}>
-                <h2>All Products price </h2>
+                <h1>Class101 Products_Page.{currentPage}</h1>
             </div>
             <hr />
 
