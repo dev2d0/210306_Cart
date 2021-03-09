@@ -1,4 +1,5 @@
 import React from 'react'
+import { InputNumber } from 'antd';
 import "./CartBlock.css"
 
 function CartBlock(props) {
@@ -15,6 +16,13 @@ function CartBlock(props) {
                 </td>
                 <td>
                     {cart.title}
+                </td>
+                <td>
+                    <InputNumber
+                        style={{ width: '65px' }}
+                        min={1}
+                    />
+                    {cart.quantity} EA
                 </td>
                 <td>
                     ₩{cart.price.toLocaleString()}원
@@ -36,6 +44,7 @@ function CartBlock(props) {
                     <tr>
                         <th>Product Image</th>
                         <th>Product Title</th>
+                        <th>Product Quantity</th>
                         <th>Product Price</th>
                         <th>Remove from Cart</th>
                     </tr>

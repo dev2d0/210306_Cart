@@ -10,6 +10,7 @@ import {
 const ProductItem = ({ props, posts, clickHandler }) => {
     const dispatch = useDispatch();
     const [Id, setId] = useState([])
+    const [carted, setCarted] = useState(false);
 
     const handleClick = (id) => {
         console.log(id)
@@ -43,7 +44,7 @@ const ProductItem = ({ props, posts, clickHandler }) => {
                  {item.availableCoupon !== false && <Coupon>할인 쿠폰</Coupon>}
 
                 <Button onClick={() => dispatch(addCart(item))} style={{ width: '100%' }} size="small" shape="round" type="danger">
-                    장바구니
+                {carted ? '빼기' : '장바구니'}
                 </Button><br />
                 <br />
                 <span>제목 :  {item.title} </span><br />

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Badge } from 'antd';
+import { useSelector } from "react-redux";
 import {
     ShoppingCartOutlined
 } from '@ant-design/icons';
@@ -13,6 +14,8 @@ import {
 } from './NavbarStyle';
 
 const Navbar = ({ toggle }) => {
+    const cart = useSelector(store => store.cartReducer);
+    console.log(cart.length)
     return (
         <>
             <Nav>
@@ -28,8 +31,8 @@ const Navbar = ({ toggle }) => {
                         Cart
                       </NavLink>
                     <NavLink to='/cart'>
-                        <Badge>
-                            <ShoppingCartOutlined style={{ fontSize: '24px', color: '#FFFFFF' }} />
+                        <Badge count={cart.length}>
+                            <ShoppingCartOutlined style={{ fontSize: '26px', color: '#FFFFFF' }} />
                         </Badge>
                     </NavLink>
                 </NavMenu>
