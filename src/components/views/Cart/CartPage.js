@@ -6,7 +6,6 @@ import { Empty } from 'antd';
 
 function CartPage() {
     const cart = useSelector(store => store.cartReducer);
-    console.log(cart)
     const [Total, setTotal] = useState(0)
     const [ShowTotal, setShowTotal] = useState(false)
 

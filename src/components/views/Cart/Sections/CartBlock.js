@@ -6,16 +6,12 @@ import "./CartBlock.css"
 
 function CartBlock(props) {
     const dispatch = useDispatch();
-    console.log(props.cart)
 
     const filterItem = (index) => {
         const cartItem = props.cart.filter((_, i) => {
             return i !== index;
         })
         dispatch(deleteCart(cartItem));
-        console.log(index)
-        console.log(props.cart)
-        console.log(cartItem)
     }
 
     const renderItems = () => (
@@ -38,7 +34,6 @@ function CartBlock(props) {
                     {cart.quantity} EA
                 </td>
                 <td>
-                    {console.log(index)}
                     ₩{cart.price.toLocaleString()}원
                 </td>
                 <td>

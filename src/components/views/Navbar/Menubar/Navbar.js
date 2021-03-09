@@ -15,7 +15,6 @@ import {
 
 const Navbar = ({ toggle }) => {
     const cart = useSelector(store => store.cartReducer);
-    console.log(cart.length)
     return (
         <>
             <Nav>
