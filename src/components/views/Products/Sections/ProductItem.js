@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Button } from 'antd';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addCart } from "../../../../Store/actions";
 import {
     List,
@@ -9,6 +9,7 @@ import {
 
 const ProductItem = ({ props, posts, clickHandler }) => {
     const dispatch = useDispatch();
+    const cart = useSelector(store => store.cartReducer);
     const [Id, setId] = useState([])
     const [carted, setCarted] = useState(false);
 
@@ -29,7 +30,34 @@ const ProductItem = ({ props, posts, clickHandler }) => {
     };//내름차순 정렬
     const sortPosts = sortData(posts, 'score')
 
+    const addToCartHandler = (item) => {
+        console.log(item)
+        if (cart.length < 3) {
+            console.log(item)
+            dispatch({
+                type: 'ADD_ITEM',
+                item: {
+                    id: item.id,
+                    title: item.title,
+                    coverImage: item.coverImage,
+                    price: item.price,
+                    score: item.score,
+                    availableCoupon: item.availableCoupon,
+                    quantity: item.quantity=1,
+                },
+            });
+        } else {
+            alert('장바구니에는 최대 3개의 상품을 담을 수 있습니다.');
+        }
+    };
+
+
     const renderCards = sortPosts.map((item, index) => {
+        if (item.availableCoupon == false){
+        }else{
+            item.availableCoupon=true
+        }
+
         console.log(item)
         return (
             <Card
@@ -41,10 +69,10 @@ const ProductItem = ({ props, posts, clickHandler }) => {
                         src={item.coverImage}
                     />
                 }>
-                 {item.availableCoupon !== false && <Coupon>할인 쿠폰</Coupon>}
+                {item.availableCoupon !== false && <Coupon>할인 쿠폰</Coupon>}
 
-                <Button onClick={() => dispatch(addCart(item))} style={{ width: '100%' }} size="small" shape="round" type="danger">
-                {carted ? '빼기' : '장바구니'}
+                <Button onClick={() => addToCartHandler(item)} style={{ width: '100%' }} size="small" shape="round" type="danger">
+                    {carted ? '빼기' : '장바구니'}
                 </Button><br />
                 <br />
                 <span>제목 :  {item.title} </span><br />

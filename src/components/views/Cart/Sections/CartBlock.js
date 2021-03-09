@@ -13,7 +13,7 @@ function CartBlock(props) {
         })
         dispatch(deleteCart(cartItem));
     }
-
+    console.log(props.cart)
     const renderItems = () => (
         props.cart && props.cart.map((cart, index) => (
             <tr key={index}>
@@ -30,14 +30,15 @@ function CartBlock(props) {
                     <InputNumber
                         style={{ width: '65px' }}
                         min={1}
+                        defaultValue={cart.quantity}
                     />
                     {cart.quantity} EA
                 </td>
                 <td>
-                    ₩{cart.price.toLocaleString()}원
+                    {`₩${cart.price.toLocaleString()}원`}
                 </td>
                 <td>
-                    <button onClick={()=>filterItem(index)} >
+                    <button onClick={() => filterItem(index)} >
                         Remove
                     </button>
                 </td>
