@@ -17,8 +17,6 @@ function Products() {
     const [quantity, setQuantity] = useState(0);
     const [carts, setCarts] = useState([])
 
-   // console.log(productItems)
-
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -31,26 +29,6 @@ function Products() {
         console.log(newCarts)
     }
 
-    const renderCards = productItems.map((item, index) => {
-        return (
-            <Card
-                key={index}
-                cover={
-                    <img
-                        style={{ width: '100%', height: '12vw', minHeight: '200px', position: 'relative', overflow: 'hidden' }}
-                        alt="thumbnail"
-                        src={item.coverImage}
-                    />
-                }>
-                <br />
-                <span>제목 :  {item.title} </span><br />
-                <br />
-                <span>가격 :  {`${item.price.toLocaleString()}원`} </span><br />
-                <span>점수 :  {`${item.score.toLocaleString()}점`} </span><br />
-            </Card>
-        )
-    })
-
     return (
         <div style={{ width: '85%', margin: '3rem auto', minHeight: '770px' }}>
             <div style={{ textAlign: 'center' }}>
@@ -59,9 +37,6 @@ function Products() {
             <hr />
 
             {/* Cards */}
-            <List>
-                {renderCards}
-            </List>
             <ProductItem posts={currentPosts} clickHandler={clickHandler} />
             <Paging postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} />
         </div>
