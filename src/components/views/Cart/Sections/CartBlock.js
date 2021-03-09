@@ -1,18 +1,31 @@
 import React from 'react'
+import { useDispatch } from "react-redux";
 import { InputNumber } from 'antd';
+import { deleteCart } from "../../../../Store/actions";
 import "./CartBlock.css"
 
 function CartBlock(props) {
+    const dispatch = useDispatch();
     console.log(props.cart)
+
+    const filterItem = (index) => {
+        const cartItem = props.cart.filter((_, i) => {
+            return i !== index;
+        })
+        dispatch(deleteCart(cartItem));
+        console.log(index)
+        console.log(props.cart)
+        console.log(cartItem)
+    }
+
     const renderItems = () => (
         props.cart && props.cart.map((cart, index) => (
             <tr key={index}>
                 <td>
                     <img
                         height='60px'
-                        style={{ width: '70px' }} alt="travel"
+                        style={{ width: '70px' }} alt="item"
                         src={cart.coverImage} />
-
                 </td>
                 <td>
                     {cart.title}
@@ -25,10 +38,11 @@ function CartBlock(props) {
                     {cart.quantity} EA
                 </td>
                 <td>
+                    {console.log(index)}
                     ₩{cart.price.toLocaleString()}원
                 </td>
                 <td>
-                    <button onClick={() => props.deleteScrap(cart.id)}>
+                    <button onClick={()=>filterItem(index)} >
                         Remove
                     </button>
                 </td>
