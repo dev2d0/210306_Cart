@@ -42,6 +42,7 @@ function CartPage() {
             {ShowTotal ?
                 <div style={{ marginTop: '3rem' }}>
                     <h2>장바구니 상품의 총액: ${prices}</h2>
+                    <h2>장바구니 상품의 할인 금액: ${prices}</h2>
                 </div>
                 :
                 <>

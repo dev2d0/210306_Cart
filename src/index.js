@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import rootReducer from "./Store/reducers/"
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());//개발자 도구에서 redux store 확인 가능
 
 ReactDOM.render(
   <Provider store={store}>

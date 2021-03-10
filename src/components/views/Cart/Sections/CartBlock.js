@@ -11,7 +11,7 @@ function CartBlock(props) {
 
     useEffect(() => {
        dispatch(setQuantity(change))
-    }, [change])//componentDidMount 대신 함수형 컴포넌트에서는 useE
+    }, [change])
 
     const filterItem = (index) => {
         const cartItem = props.cart.filter((_, i) => {
@@ -19,29 +19,9 @@ function CartBlock(props) {
         })
         dispatch(deleteCart(cartItem));
     }
-    /*
-    const onChange = (index, cart) => {
-        dispatch({
-            type: 'QUANTITY CHANGE',
-            item: {
-                id: cart.id,
-                title: cart.title,
-                coverImage: cart.coverImage,
-                price: cart.price,
-                score: cart.score,
-                availableCoupon: cart.availableCoupon,
-                quantity: cart.quantity=1,
-            },
-        });
-    }*/
+
     const onChange = (value, index, cart) => {
         setChanges([value, index, cart])
-        console.log(value)
-        console.log(change)
-        console.log(index)
-        console.log(cart)
-       // Quantity(index, cart)
-       // dispatch(setQuantity({count, index, cart}))
     }
 
     console.log(props.cart)
