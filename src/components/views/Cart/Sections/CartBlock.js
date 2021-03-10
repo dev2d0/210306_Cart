@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux";
 import { InputNumber } from 'antd';
 import { deleteCart } from "../../../../Store/actions";
+import { setQuantity } from "../../../../Store/actions";
 import "./CartBlock.css"
 
 function CartBlock(props) {
     const dispatch = useDispatch();
+    const [change, setChanges] = useState([1, 0, 0]);
+
+    useEffect(() => {
+       dispatch(setQuantity(change))
+    }, [change])//componentDidMount 대신 함수형 컴포넌트에서는 useE
 
     const filterItem = (index) => {
         const cartItem = props.cart.filter((_, i) => {
@@ -13,6 +19,31 @@ function CartBlock(props) {
         })
         dispatch(deleteCart(cartItem));
     }
+    /*
+    const onChange = (index, cart) => {
+        dispatch({
+            type: 'QUANTITY CHANGE',
+            item: {
+                id: cart.id,
+                title: cart.title,
+                coverImage: cart.coverImage,
+                price: cart.price,
+                score: cart.score,
+                availableCoupon: cart.availableCoupon,
+                quantity: cart.quantity=1,
+            },
+        });
+    }*/
+    const onChange = (value, index, cart) => {
+        setChanges([value, index, cart])
+        console.log(value)
+        console.log(change)
+        console.log(index)
+        console.log(cart)
+       // Quantity(index, cart)
+       // dispatch(setQuantity({count, index, cart}))
+    }
+
     console.log(props.cart)
     const renderItems = () => (
         props.cart && props.cart.map((cart, index) => (
@@ -30,12 +61,15 @@ function CartBlock(props) {
                     <InputNumber
                         style={{ width: '65px' }}
                         min={1}
+                        max={100}
                         defaultValue={cart.quantity}
+                        onChange={value => onChange(value, index, cart)}
+                        //,()=>dispatch(setQuantity({count, index, cart}))
                     />
-                    {cart.quantity} EA
+                    {cart.quantity}개
                 </td>
                 <td>
-                    {`₩${cart.price.toLocaleString()}원`}
+                    {`₩${cart.price}원`}
                 </td>
                 <td>
                     <button onClick={() => filterItem(index)} >

@@ -14,15 +14,16 @@ function CartPage() {
 
     }, [cart])
 
-    let calculateTotal = (cart) => {
+    let calculateTotal = (cartDetail) => {
         let total = 0;
 
-        cart.map(item => {
-            total += parseInt(item.price, 10)
+        cartDetail.map(item => {
+            total += parseInt(item.price, 10) * item.quantity
         })
 
         setTotal(total)
         setShowTotal(true)
+
     }
 
     const deleteHandler = (Id) => {

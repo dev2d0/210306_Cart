@@ -11,3 +11,11 @@ export const deleteCart = (items) => {
         payload: items
     }
 }
+
+export const setQuantity = (item) => {
+    console.log(item)
+    return {
+    type: "SET_QUANTITY",
+    item
+    }
+};
