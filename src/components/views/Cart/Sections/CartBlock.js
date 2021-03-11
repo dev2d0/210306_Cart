@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux";
 import { InputNumber } from 'antd';
-import { deleteCart } from "../../../../Store/actions";
 import { setQuantity } from "../../../../Store/actions";
 import "./CartBlock.css"
 
@@ -13,11 +12,11 @@ function CartBlock(props) {
        dispatch(setQuantity(change))
     }, [change])
 
-    const filterItem = (index) => {
-        const cartItem = props.cart.filter((_, i) => {
-            return i !== index;
-        })
-        dispatch(deleteCart(cartItem));
+    const deleteItemHandler = (id) => {
+        dispatch({
+            type: 'DELETE_ITEM',
+            id: id,
+          });
     }
 
     const onChange = (value, index, cart) => {
@@ -52,7 +51,7 @@ function CartBlock(props) {
                     {`₩${cart.price}원`}
                 </td>
                 <td>
-                    <button onClick={() => filterItem(index)} >
+                    <button onClick={() => deleteItemHandler(cart.id)} >
                         Remove
                     </button>
                 </td>

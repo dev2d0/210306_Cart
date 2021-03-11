@@ -1,14 +1,14 @@
-export const addCart = (item) => {
+export const addItem = (item) => {
     return {
         type: "ADD_ITEM",
         payload: item
     }
 }
 
-export const deleteCart = (items) => {
+export const deleteItem = (id) => {
     return {
         type: "DELETE_ITEM",
-        payload: items
+        payload: id
     }
 }
 
