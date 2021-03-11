@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Button } from 'antd';
-import { productItems } from "../../data/productItems.js.js";
+import { productItems } from "../../data/productItems.js";
 import ProductItem from './Sections/ProductItem'
 import Paging from './Sections/Paging'
 import 'antd/dist/antd.css';
