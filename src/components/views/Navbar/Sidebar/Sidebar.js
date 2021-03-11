@@ -6,8 +6,7 @@ import {
     SidebarWrapper, 
     SidebarMenu, 
     SidebarLink, 
-    SideBtnWrap, 
-    SidebarRoute } from './SidebarStyle';
+} from './SidebarStyle';
 
 function Sidebar({ isOpen, toggle }) {
     return (
@@ -17,7 +16,7 @@ function Sidebar({ isOpen, toggle }) {
             </Icon>
             <SidebarWrapper>
                 <SidebarMenu>
-                    <SidebarLink to='/products' onClick={toggle}>Products</SidebarLink>
+                    <SidebarLink to='/' onClick={toggle}>Products</SidebarLink>
                     <SidebarLink to='/cart' onClick={toggle}>Cart</SidebarLink>
                 </SidebarMenu>
             </SidebarWrapper>

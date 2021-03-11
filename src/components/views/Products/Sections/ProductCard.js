@@ -8,7 +8,6 @@ import {
 function ProductCard({ item, index }) {
     const dispatch = useDispatch();
     const cart = useSelector(store => store.cartReducer);
-    console.log(item)
     const [carted, setCarted] = useState(false);
 
     useEffect(() => {

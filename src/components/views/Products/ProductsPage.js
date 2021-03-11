@@ -3,7 +3,6 @@ import { productItems } from "../../data/productItems.js";
 import ProductItem from './Sections/ProductItem'
 import Paging from './Sections/Paging'
 import 'antd/dist/antd.css';
-import ProductCard from './Sections/ProductCard.js';
 
 function Products() {
     const [posts, setPosts] = useState(productItems);

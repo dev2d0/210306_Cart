@@ -4,7 +4,7 @@ import CartPayment from './Sections/CartPayment.js';
 import { coupons } from "../../data/coupons.js";
 import { useSelector } from "react-redux";
 import { Empty } from 'antd';
-
+import { Select } from './Sections/CartStyle';
 function CartPage() {
     const cart = useSelector(store => store.cartReducer);
     const [Total, setTotal] = useState(0)
@@ -13,10 +13,9 @@ function CartPage() {
     const [coupon, setCoupon] = useState([]);
 
     useEffect(() => {
-        { calculateTotal(cart) }
-        calculateDiscount(cart, coupon)
-
-    }, [cart, coupon])
+        calculateDiscount(cart, coupon);
+        calculateTotal(cart);
+    }, [cart, coupon, Discount])
 
     let calculateTotal = (cart) => {
         let total = 0;
@@ -30,16 +29,24 @@ function CartPage() {
     }
 
     const calculateDiscount = (cart, coupon) => {
-        const discounItems = cart.filter((item) => item?.availableCoupon !== false);
+        const discounItems = cart.filter((item) => item.availableCoupon !== false);
         let discounttotal = 0;
         if (coupon === 'rate') {
-            discounItems.map(item => {
-                discounttotal += parseInt(item.price, 10) * item.quantity * 0.1
-                setDiscount(discounttotal)
-            })
+            if (discounItems.length > 0) {
+                discounItems.map(item => {
+                    discounttotal += parseInt(item.price, 10) * item.quantity * 0.1
+                    setDiscount(discounttotal)
+                })
+            } else {
+                setDiscount(0)
+            }
         }
         else if (coupon === 'amount') {
-            setDiscount(10000)
+            if (discounItems.length > 0) {
+                setDiscount(10000)
+            } else {
+                setDiscount(0)
+            }
         }
         return 0;
     };
@@ -47,30 +54,29 @@ function CartPage() {
 
     var TotalPrices = (Total).toLocaleString()//금액에 천단위 콤마를 찍어주도록 정의해준다.
     var DiscountPrices = (Discount).toLocaleString()
+    var FinalPrices = (Total - Discount).toLocaleString()
     return (
         <div style={{ width: '85%', margin: '3rem auto', minHeight: '750px' }}>
-            <h1>My Cart</h1>
-            <div>
-                <CartBlock cart={cart} />
-            </div>
-            <CartPayment />
-
+            <h1 style={{ textAlign: 'center' }}>My Cart</h1><br />
+            <CartBlock cart={cart} />
+            <br />
+            <br />
             {/* 쿠폰 */}
-            <select onChange={(e) => setCoupon(e.target.value)}>
+            <h2>쿠폰 선택</h2>
+            <Select onChange={(e) => setCoupon(e.target.value)}>
                 <option hidden>쿠폰을 선택해주세요.</option>
                 {coupons.map(({ type, title }, idx) => (
                     <option key={idx} value={type}>
                         {title}
                     </option>
                 ))}
-            </select>
-
+            </Select>
+            <br />
+            <br />
+            <br />
             {/* 결제 */}
             {ShowTotal ?
-                <div style={{ marginTop: '3rem' }}>
-                    <h2>장바구니 상품의 총액: ₩{TotalPrices}</h2>
-                    <h2>장바구니 상품의 할인 금액: ₩{DiscountPrices}</h2>
-                </div>
+                <CartPayment TotalPrices={TotalPrices} DiscountPrices={DiscountPrices} FinalPrices={FinalPrices} />
                 :
                 <>
                     <br />

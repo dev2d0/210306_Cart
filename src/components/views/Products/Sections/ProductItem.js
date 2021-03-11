@@ -15,8 +15,6 @@ const ProductItem = ({ posts }) => {
     };//내름차순 정렬
     const sortPosts = sortData(posts, 'score')
 
-    console.log(sortPosts)
-
     return (
         <List>
             {sortPosts.map((item, index) => 

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Badge } from 'antd';
 import { useSelector } from "react-redux";
-import {
-    ShoppingCartOutlined
-} from '@ant-design/icons';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import "./Navbar.css";
 import {
     Nav,
     NavLink,
@@ -18,20 +17,17 @@ const Navbar = ({ toggle }) => {
     return (
         <>
             <Nav>
-                <NavLink to='/products'>
+                <NavLink to='/'>
                     Class101
                  </NavLink>
                 <Bars onClick={toggle} />
                 <NavMenu>
-                    <NavLink to='/products'>
+                    <NavLink to='/'>
                         Products
-                      </NavLink>
-                    <NavLink to='/cart'>
-                        Cart
-                      </NavLink>
+                    </NavLink>
                     <NavLink to='/cart'>
                         <Badge count={cart.length}>
-                            <ShoppingCartOutlined style={{ fontSize: '26px', color: '#FFFFFF' }} />
+                            <ShoppingCartOutlined style={{fontSize: '26px', color: '#FFFFFF'}}/>
                         </Badge>
                     </NavLink>
                 </NavMenu>

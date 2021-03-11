@@ -13,7 +13,6 @@ export const deleteItem = (id) => {
 }
 
 export const setQuantity = (item) => {
-    console.log(item)
     return {
     type: "SET_QUANTITY",
     item
