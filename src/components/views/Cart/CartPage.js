@@ -9,26 +9,30 @@ function CartPage() {
     const cart = useSelector(store => store.cartReducer);
     const [Total, setTotal] = useState(0)
     const [Discount, setDiscount] = useState(0)
-    const [ShowTotal, setShowTotal] = useState(false)
+
     const [coupon, setCoupon] = useState([]);
     const [checkItems, setCheckItems] = useState([...cart]);
 
     useEffect(() => {
-        setCheckItems(cart)
         calculateDiscount(checkItems, coupon);
         calculateTotal(checkItems);
-    }, [cart, coupon, Discount])
+        console.log(3)
+    }, [cart, coupon, Discount, checkItems])
 
 
     const onClick = (e, cart) => {
+        console.log(checkItems)
+        console.log(e.target.checked, cart)
         if (e.target.checked == false) {
             const Index = checkItems.findIndex((item) => item.id === cart.id);
             if (Index >= 0) {
-                checkItems.splice(Index, 1);       
+                console.log(Index)
+                checkItems.splice(Index, 1);
+                setCheckItems([...checkItems])
             }
-            setCheckItems([...checkItems])
         } else {
             setCheckItems([...checkItems, cart])
+            console.log(2)
         }
     }
 
@@ -40,7 +44,6 @@ function CartPage() {
         })
 
         setTotal(total)
-        setShowTotal(true)
     }
 
     const calculateDiscount = (cart, coupon) => {
@@ -90,16 +93,7 @@ function CartPage() {
             <br />
             <br />
             {/* 결제 */}
-            {ShowTotal ?
-                <CartPayment TotalPrices={TotalPrices} DiscountPrices={DiscountPrices} FinalPrices={FinalPrices} />
-                :
-                <>
-                    <br />
-                    <Empty description={false} />
-                    <h5>There are no items in Cart.</h5>
-                </>
-            }
-
+            <CartPayment TotalPrices={TotalPrices} DiscountPrices={DiscountPrices} FinalPrices={FinalPrices} />
         </div>
 
 
