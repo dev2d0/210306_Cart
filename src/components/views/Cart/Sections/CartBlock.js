@@ -22,7 +22,10 @@ function CartBlock(props) {
         props.cart && props.cart.map((cart, index) => (
             <tr key={index}>
                 <Td>
-                    <Checkbox defaultChecked={true} onChange={checked => props.onClick(checked, cart)}/>
+                    <Checkbox 
+                    key={cart.id} //매우 중요 별표 99999999개 이거 없으면 오류남
+                    defaultChecked={true} 
+                    onChange={checked => props.onClick(checked, cart)}/>
                 </Td>
                 <Td>
                     <img
@@ -35,7 +38,7 @@ function CartBlock(props) {
                 </Td>
                 <Td>
                     <InputNumber
-                        key={cart.id}
+                        key={cart.id}//매우 중요 별표 99999999개 이거 없으면 오류남
                         style={{ width: '65px' }}
                         min={1}
                         max={100}
@@ -51,7 +54,7 @@ function CartBlock(props) {
                     {cart.availableCoupon ? <Coupon>쿠폰 사용가능</Coupon> : <Coupon color={'black'}>쿠폰 사용불가</Coupon>}
                 </Td>
                 <Td>
-                    <Button onClick={() => deleteItemHandler(cart.id)} type="primary" size="middle">
+                    <Button onClick={() => props.deleteItemHandler(cart.id)} type="primary" size="middle">
                         삭제하기
                     </Button>
                 </Td>
