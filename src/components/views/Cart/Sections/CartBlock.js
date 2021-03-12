@@ -6,11 +6,6 @@ import { Coupon, Td, Th, Table } from './CartStyle';
 
 function CartBlock(props) {
     const dispatch = useDispatch();
-    const [change, setChanges] = useState([1, 0, 0]);
-
-    useEffect(() => {
-        dispatch(setQuantity(change))
-    }, [change])
 
     const deleteItemHandler = (id) => {
         dispatch({
@@ -19,10 +14,9 @@ function CartBlock(props) {
         });
     }
 
-    const onChange = (value, index, cart) => {
-        setChanges([value, index, cart])
+    const onChange = (value, id, cart) => {
+        dispatch(setQuantity(value, id, cart))
     }
-
 
     const renderItems = () => (
         props.cart && props.cart.map((cart, index) => (
@@ -41,11 +35,12 @@ function CartBlock(props) {
                 </Td>
                 <Td>
                     <InputNumber
+                        key={cart.id}
                         style={{ width: '65px' }}
                         min={1}
                         max={100}
                         defaultValue={cart.quantity}
-                        onChange={value => onChange(value, index, cart)}
+                        onChange={value => onChange(value, cart.id, cart)}
                     />
                     개
                 </Td>

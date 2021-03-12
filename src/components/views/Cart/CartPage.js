@@ -14,15 +14,17 @@ function CartPage() {
     const [checkItems, setCheckItems] = useState([...cart]);
 
     useEffect(() => {
+        setCheckItems(cart)
         calculateDiscount(checkItems, coupon);
         calculateTotal(checkItems);
-    }, [cart, coupon, Discount, checkItems])
+    }, [cart, coupon, Discount])
+
 
     const onClick = (e, cart) => {
         if (e.target.checked == false) {
             const Index = checkItems.findIndex((item) => item.id === cart.id);
             if (Index >= 0) {
-                checkItems.splice(Index, 1);
+                checkItems.splice(Index, 1);       
             }
             setCheckItems([...checkItems])
         } else {

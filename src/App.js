@@ -9,8 +9,8 @@ const App = () => {
     <Router>
       <Navbar />
       <Switch>
-        <Route path='/' exact component={ProductsPage} />
-        <Route path='/cart' exact component={CartPage} />
+        <Route exact path='/' exact component={ProductsPage} />
+        <Route exact path='/cart' exact component={CartPage} />
       </Switch>
       <Copyright />
     </Router>

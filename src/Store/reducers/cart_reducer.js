@@ -10,11 +10,12 @@ const cartReducer = (state = [], action) => {
             return [...state]
 
         case "SET_QUANTITY":
-            if (state[action.item[1]] && action.item[0] >= 1) {
-                state[action.item[1]].quantity = action.item[0]
-            } else if (state[action.item[1]] && action.item[0] < 1) {
+            if (action.value >= 1) {
+                const Index = state.findIndex((cart) => cart.id === action.id);
+                state[Index].quantity=action.value
+            } else if (action.value < 1) {
                 alert("수량은 1개 이상이어야 합니다.")
-            } else if (state[action.item[1]] && action.item[0] > 100) {
+            } else if (action.value > 100) {
                 alert("수량은 100개 이하여야 합니다.")
             }
             return [

@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 function CartPayment(props) {
 
-
     return (
         <>
             <h1>결제 금액</h1>

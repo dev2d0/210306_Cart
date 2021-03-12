@@ -12,9 +12,11 @@ export const deleteItem = (id) => {
     }
 }
 
-export const setQuantity = (item) => {
+export const setQuantity = (value, id, cart) => {
     return {
     type: "SET_QUANTITY",
-    item
+    value: value, 
+    id: id, 
+    cart: cart
     }
 };
