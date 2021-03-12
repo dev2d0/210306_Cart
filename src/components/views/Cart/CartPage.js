@@ -16,23 +16,18 @@ function CartPage() {
     useEffect(() => {
         calculateDiscount(checkItems, coupon);
         calculateTotal(checkItems);
-        console.log(3)
     }, [cart, coupon, Discount, checkItems])
 
 
     const onClick = (e, cart) => {
-        console.log(checkItems)
-        console.log(e.target.checked, cart)
         if (e.target.checked == false) {
             const Index = checkItems.findIndex((item) => item.id === cart.id);
             if (Index >= 0) {
-                console.log(Index)
                 checkItems.splice(Index, 1);
                 setCheckItems([...checkItems])
             }
         } else {
             setCheckItems([...checkItems, cart])
-            console.log(2)
         }
     }
 
