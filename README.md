@@ -1,6 +1,10 @@
 # 210306_Cart
 SeeLive : https://dev2d0.github.io/210306_Cart/
 
+폴더 다운로드 이후
+- npm install
+- npm run start
+
 ## Skills
 - React, React Hooks
 - Redux
