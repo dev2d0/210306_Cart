@@ -2,7 +2,6 @@ import React from 'react';
 import { Badge } from 'antd';
 import { useSelector } from "react-redux";
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import "./Navbar.css";
 import {
     Nav,
     NavLink,

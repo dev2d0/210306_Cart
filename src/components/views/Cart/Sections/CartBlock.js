@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux";
-import { InputNumber, Button } from 'antd';
+import { InputNumber, Button, Checkbox } from 'antd';
 import { setQuantity } from "../../../../Store/actions";
 import { Coupon, Td, Th, Table } from './CartStyle';
 
@@ -23,9 +23,13 @@ function CartBlock(props) {
         setChanges([value, index, cart])
     }
 
+
     const renderItems = () => (
         props.cart && props.cart.map((cart, index) => (
             <tr key={index}>
+                <Td>
+                    <Checkbox defaultChecked={true} onChange={checked => props.onClick(checked, cart)}/>
+                </Td>
                 <Td>
                     <img
                         height='60px'
@@ -66,6 +70,7 @@ function CartBlock(props) {
             <Table>
                 <thead>
                     <tr>
+                        <Th>Check</Th>
                         <Th>Product Image</Th>
                         <Th>Product Title</Th>
                         <Th>Product Quantity</Th>

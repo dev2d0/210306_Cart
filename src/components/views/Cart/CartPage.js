@@ -11,11 +11,24 @@ function CartPage() {
     const [Discount, setDiscount] = useState(0)
     const [ShowTotal, setShowTotal] = useState(false)
     const [coupon, setCoupon] = useState([]);
+    const [checkItems, setCheckItems] = useState([...cart]);
 
     useEffect(() => {
-        calculateDiscount(cart, coupon);
-        calculateTotal(cart);
-    }, [cart, coupon, Discount])
+        calculateDiscount(checkItems, coupon);
+        calculateTotal(checkItems);
+    }, [cart, coupon, Discount, checkItems])
+
+    const onClick = (e, cart) => {
+        if (e.target.checked == false) {
+            const Index = checkItems.findIndex((item) => item.id === cart.id);
+            if (Index >= 0) {
+                checkItems.splice(Index, 1);
+            }
+            setCheckItems([...checkItems])
+        } else {
+            setCheckItems([...checkItems, cart])
+        }
+    }
 
     let calculateTotal = (cart) => {
         let total = 0;
@@ -58,7 +71,7 @@ function CartPage() {
     return (
         <div style={{ width: '85%', margin: '3rem auto', minHeight: '750px' }}>
             <h1 style={{ textAlign: 'center' }}>My Cart</h1><br />
-            <CartBlock cart={cart} />
+            <CartBlock cart={cart} onClick={onClick} />
             <br />
             <br />
             {/* 쿠폰 */}
