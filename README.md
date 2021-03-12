@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# 210306_Cart
+SeeLive : https://dev2d0.github.io/210306_Cart/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Skills
+- React, React Hooks
+- Redux
+- Styled Components
+- Ant Design
 
-## Available Scripts
+## ProductPage
+- 한 페이지에 총 5개의 개시물이 올라가도록 Pagination 하였으며 각 페이지는 Score(♥)를 기준으로 정렬하였습니다.
+- 최대 3개까지 장바구니에 추가 및 빼기를 할 수 있습니다.
+- 할인 쿠폰이 있는 품목들을 표기해 두었습니다.
 
-In the project directory, you can run:
+## CartPage
+- 상품을 선택해서 결제 및 계산해주는 체크박스가 있습니다.
+- 각각의 상품을 장바구니에서 삭제할 수 있습니다.
+- 수량을 조절하여 구매할 수 있습니다.
+- 쿠폰을 통해 할인을 받을 수 있습니다.(쿠폰이용이 불가능한 상품은 쿠폰사용에서 제외됩니다.)
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 회고
+원래 했던 프로젝트들에서는 서버단에서 데이터를 처리하는 식으로 많이 짰는데 프론트만 이용하여 하는 프로젝트를 하다보니 모두 프론트단에서 데이터 가공을 하였다. 그리고 Styled-Components같은 경우도 이용해 보기는 했지만 프로젝트에서 주력으로 이용한 적은 없었는데 이번 프로젝트에서는 styled-components를 이용하고 프론트단에서 데이터를 가공하는 등의 다른 시도를 해보려고 노력했다.<br />
+처음에 버그가 너무 많아서 다 고치느라 하루가 걸렸다.
+체크박스를 인덱스로 관리하면 더 편하게 코드를 짧고 편하게 작성할 수 있을 것 같아서 인덱스를 이용했더니 상품을 삭제하고 나면 삭제된 다음 인덱스의 데이터에 영향을 미치는가 하면 반대로 상품을 삭제했더니 수량이 다음 인덱스의 상품에 영향을 주기도 하고 총체적 난국이었다.(진짜 체크박스 고치면 delete 버그생기고 delete 해결하면 수량에서 버그가 나고 했다...ㅎ)<br />
+그래서 인덱스로 관리하는 것을 포기하고 기본에 충실하여 새롭게 id를 이용해 작성했다. 이때도 상품을 삭제하면 다음 체크박스에 영향을 미치는 오류 등이 발생하여 머리가 조금 아팠지만 key값을 주니 해결되었다.<br />
+지금까지 key값을 안넣어도 잘 굴러가서 중요성을 간과 하고 있었는데 key값만 제대로 줘도 오류 발생률이 현저히 줄어드는 것을 두 눈으로 보고나니 그 중요성을 다시 한번 깨닫게 되었다.
