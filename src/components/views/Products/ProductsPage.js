@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { productItems } from "../../data/productItems.js";
 import ProductItem from './Sections/ProductItem'
 import Paging from './Sections/Paging'
@@ -13,6 +13,19 @@ function Products() {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    useEffect(() => {
+        fetch('data/productItems.json', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                setPosts(res.productItems)
+            })
+    }, []);
 
     return (
         <div style={{ width: '85%', margin: '3rem auto', minHeight: '770px' }}>

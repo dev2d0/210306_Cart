@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CartBlock from './Sections/CartBlock.js';
 import CartPayment from './Sections/CartPayment.js';
-import { coupons } from "../../data/coupons.js";
 import { useSelector, useDispatch } from "react-redux";
 import { Select } from './Sections/CartStyle';
 function CartPage() {
@@ -11,7 +10,21 @@ function CartPage() {
     const [Discount, setDiscount] = useState(0)
 
     const [coupon, setCoupon] = useState([]);
+    const [coupons, setCoupons] = useState([]);
     const [checkItems, setCheckItems] = useState([...cart]);
+
+    useEffect(() => {
+        fetch('data/coupons.json', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                setCoupons(res.coupons)
+            })
+    }, []);
 
     useEffect(() => {
         calculateDiscount(checkItems, coupon);
@@ -31,7 +44,7 @@ function CartPage() {
         }
     }
 
-    const deleteItemHandler = (id) => {
+    const deleteItemHandler = (id) => {//카트에서 상품 삭제
         dispatch({
             type: 'DELETE_ITEM',
             id: id,
@@ -43,7 +56,7 @@ function CartPage() {
         }
     }
 
-    let calculateTotal = (cart) => {
+    let calculateTotal = (cart) => {//총 상품 금액 계산
         let total = 0;
 
         cart.map(item => {
@@ -52,7 +65,7 @@ function CartPage() {
         setTotal(total)
     }
 
-    const calculateDiscount = (cart, coupon) => {
+    const calculateDiscount = (cart, coupon) => {//할인 금액 계산
         const discounItems = cart.filter((item) => item.availableCoupon !== false);
         let discounttotal = 0;
         if (coupon === 'rate') {
@@ -62,7 +75,7 @@ function CartPage() {
                     setDiscount(discounttotal)
                 })
             } else {
-                setDiscount(0)
+                setDiscount(0)//안해주면 업데이트 안됨
             }
         }
         else if (coupon === 'amount') {
@@ -82,9 +95,11 @@ function CartPage() {
     return (
         <div style={{ width: '85%', margin: '3rem auto', minHeight: '750px' }}>
             <h1 style={{ textAlign: 'center' }}>My Cart</h1><br />
+            {/* 장바구니 상품 카드 */}
             <CartBlock cart={cart} onClick={onClick} deleteItemHandler={deleteItemHandler} />
             <br />
             <br />
+
             {/* 쿠폰 */}
             <h2>쿠폰 선택</h2>
             <Select onChange={(e) => setCoupon(e.target.value)}>
@@ -95,6 +110,7 @@ function CartPage() {
                     </option>
                 ))}
             </Select>
+
             <br />
             <br />
             <br />

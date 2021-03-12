@@ -16,7 +16,7 @@ function ProductCard({ item, index }) {
             item.availableCoupon = true
         }
         const Carted = cart.some((product) => product.id === item.id);
-        //다시 reload됐을 때 다시 담을 수 있는 버그 Fix, 처음부터 Cart에 있는 항목을 탐색함.
+        //다시 reload됐을 때 다시 담을 수 있는 버그 Fix, 상품은 담겨있는데 안담긴 버튼으로 표시됨. 처음부터 Cart에 있는 항목을 탐색함.
         setCarted(Carted);
     }, [item])
 
@@ -37,6 +37,7 @@ function ProductCard({ item, index }) {
             });
         } else {
             alert('장바구니에는 최대 3개의 상품을 담을 수 있습니다.');
+            setCarted(false)//에러는 뜨는데 담긴 표시로 나옴. 담긴 표시 안되게 해줌.
         }
     };
 

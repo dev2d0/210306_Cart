@@ -7,13 +7,6 @@ import { Coupon, Td, Th, Table } from './CartStyle';
 function CartBlock(props) {
     const dispatch = useDispatch();
 
-    const deleteItemHandler = (id) => {
-        dispatch({
-            type: 'DELETE_ITEM',
-            id: id,
-        });
-    }
-
     const onChange = (value, id, cart) => {
         dispatch(setQuantity(value, id, cart))
     }
