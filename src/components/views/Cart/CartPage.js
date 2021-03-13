@@ -92,34 +92,38 @@ function CartPage() {
     var TotalPrices = (Total).toLocaleString()//금액에 천단위 콤마를 찍어주도록 정의해준다.
     var DiscountPrices = (Discount).toLocaleString()
     var FinalPrices = (Total - Discount).toLocaleString()
-    return (
-        <div style={{ width: '85%', margin: '3rem auto', minHeight: '750px' }}>
-            <h1 style={{ textAlign: 'center' }}>My Cart</h1><br />
-            {/* 장바구니 상품 카드 */}
-            <CartBlock cart={cart} onClick={onClick} deleteItemHandler={deleteItemHandler} />
-            <br />
-            <br />
+    if (coupons) {
+        return (
+            <div style={{ width: '85%', margin: '3rem auto', minHeight: '750px' }}>
+                <h1 style={{ textAlign: 'center' }}>My Cart</h1><br />
+                {/* 장바구니 상품 카드 */}
+                <CartBlock cart={cart} onClick={onClick} deleteItemHandler={deleteItemHandler} />
+                <br />
+                <br />
 
-            {/* 쿠폰 */}
-            <h2>쿠폰 선택</h2>
-            <Select onChange={(e) => setCoupon(e.target.value)}>
-                <option hidden>쿠폰을 선택해주세요.</option>
-                {coupons.map(({ type, title }, idx) => (
-                    <option key={idx} value={type}>
-                        {title}
-                    </option>
-                ))}
-            </Select>
+                {/* 쿠폰 */}
+                <h2>쿠폰 선택</h2>
+                <Select onChange={(e) => setCoupon(e.target.value)}>
+                    <option hidden>쿠폰을 선택해주세요.</option>
+                    {coupons.map(({ type, title }, idx) => (
+                        <option key={idx} value={type}>
+                            {title}
+                        </option>
+                    ))}
+                </Select>
 
-            <br />
-            <br />
-            <br />
-            {/* 결제 */}
-            <CartPayment TotalPrices={TotalPrices} DiscountPrices={DiscountPrices} FinalPrices={FinalPrices} />
-        </div>
-
-
-    )
+                <br />
+                <br />
+                <br />
+                {/* 결제 */}
+                <CartPayment TotalPrices={TotalPrices} DiscountPrices={DiscountPrices} FinalPrices={FinalPrices} />
+            </div>
+        )
+    } else{
+        return(
+            <div>Loading...</div>
+        )
+    }
 }
 
 export default CartPage
