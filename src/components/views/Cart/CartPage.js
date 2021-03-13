@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CartBlock from './Sections/CartBlock.js';
 import CartPayment from './Sections/CartPayment.js';
+import { coupones } from '../../data/coupons';
 import { useSelector, useDispatch } from "react-redux";
 import { Select } from './Sections/CartStyle';
 function CartPage() {
@@ -10,7 +11,7 @@ function CartPage() {
     const [Discount, setDiscount] = useState(0)
 
     const [coupon, setCoupon] = useState([]);
-    const [coupons, setCoupons] = useState([]);
+    const [coupons, setCoupons] = useState(coupones);
     const [checkItems, setCheckItems] = useState([...cart]);
 
     useEffect(() => {
