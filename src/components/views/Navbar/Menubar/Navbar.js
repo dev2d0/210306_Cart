@@ -17,7 +17,7 @@ const Navbar = ({ toggle }) => {
         <>
             <Nav>
                 <NavLink to='/'>
-                    Class101
+                    Dev2d0's Market
                  </NavLink>
                 <Bars onClick={toggle} />
                 <NavMenu>
